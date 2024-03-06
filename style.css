@@ -1,0 +1,189 @@
+/* Reset CSS */
+*{
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+
+img{
+display: block;
+}
+
+.wrapper{
+width: 100%;
+height: 100vh;
+background: #a7ddbc;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+
+.filter-wrapper{
+width: 100%;
+max-width: 1200px;
+/* background-color: red; */
+}
+
+
+/* Filter Buttons Styke */
+.filter-btns{
+width: 100%;
+display: flex; /*flex는 적용하고싶은 자식의 부모에게 준다.*/
+column-gap: .25rem;
+background: yellow;
+}
+
+.filter-btns button{
+width: 16.66%;
+border-radius: 0;
+border: 1px solid rgb(255, 0, 0);
+color: #fff;
+background: #316764;
+padding: 0.5rem 0;
+}
+
+.filter-btns button:hover, 
+.filter-btns button.active{
+color: #212121;
+background: #609687;}
+
+
+/* .filter-images{
+width: 100%;
+height: 500px;
+overflow: hidden;
+border: 1px solid #fff;
+justify-content: center;
+display: flex;
+align-items: center;
+} */
+
+/* Filter Images Style */
+.filter-images{
+width: 100%;
+height: auto;
+display: flex;
+flex-wrap: wrap;
+}
+
+.filter-image{
+width: 25%;
+padding: .25rem;
+/* animation-name: scale;
+animation-duration: .4s;
+animation-iteration-count: 1;
+} */
+animation:scale .4s 1;
+}
+
+
+@keyframes scale {
+  from{transform:scale(0);}
+  to{transform:scale(1);}
+
+}
+
+.filter-image > span{
+width: 100%;
+border: 3px soild rgb(255, 255, 255);
+background-color: #316764;
+display: block;
+padding: .25rem;
+position:relative; 
+/* 부모가 position : relatiove 가 오면 자손에 position: absolute가 따라와서 설정되어야한다.  */
+}
+
+.filter-image > span:after{
+content: '';
+position: absolute;
+display: block;
+width: 100%;
+height:100%;
+left: 0;
+top: 0;
+background: #fff;
+opacity: 0;
+transition: all 0.4s;
+}
+
+.filter-image:hover > span:after{
+  opacity: 0.3;
+}
+
+.filter-image img{
+width: 100%;
+}
+
+/* Light Box Style */
+.light-box{
+  position: fixed;
+  width: 50%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%); /*왼쪽에서 50퍼 위에서 50퍼 사이즈로 내려왔고 그다음  그 크기만큼 50퍼센트 줄여주면 가운데로 온다*/
+  z-index: 2;
+  background: #316764;
+  padding : 1rem;
+  border-radius: 0.25rem;
+  animation:lb-scale 0.4s 1;
+  display: none;
+}
+/* Light Box에 박스 사이즈를 width: 50% 정하더라도 이미지 사이즈가 더 크고 사이즈를 정해놓지 않으면 이미지가 초과된다.
+그렇기 때문에  자식 요소인 .light-box-image img 태그에 width 100% 줌으로서 부모 사이즈 width 50%사이즈에 꽉차게된다. */
+.light-box .light-box-image img{
+  width: 100%;
+}
+
+.filter-image.show{
+  display:block;
+}
+
+.filter-image.hide{
+  display: none;
+}
+
+
+@keyframes lb-scale {
+from{transform: translate(-50%, -50%) scale(0);}
+to{transform: translate(-50%,-50%) scale(1);}
+}
+
+.light-box-text{
+display: flex;
+justify-content: space-between;
+color: #fff;
+padding-bottom: 1rem;
+}
+
+.light-box-text .title{
+display: flex;
+column-gap: .25rem;
+}
+
+.light-box .light-box-image{
+border: 1px solid #fff;
+padding: 0.25rem;
+border-radius: 0.25rem;
+}
+
+.light-box .light-box-image img{
+width: 100%;
+border-radius: 0.25rem;
+}
+
+.overlay{
+width: 100%;
+height: 100%;
+position: fixed; /*fixed는 겹치게 만드는 것이다.*/
+background: #000;
+left: 0;
+top: 0;
+z-index: 1;
+opacity: 0.7;
+display: none;
+/* fixed로 인해서 겹쳤기 때문에 z-index 1, 2 레이어 깔리는 순서를 정한다. .overlay가 z-index 1 이니 light box가 위로 올라온다  */
+}
+
+.light-box.show, .overlay.show{
+display: block;
+}
